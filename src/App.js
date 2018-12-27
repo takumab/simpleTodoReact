@@ -8,14 +8,32 @@ class App extends Component {
     super()
     this.state = {
       todos: todoData
-    }
+    };
+
+    this.handleChange = this.handleChange.bind(this)
   }
+
+  handleChange(id) {
+
+    this.setState(prevState => {
+      const updatedTodos = prevState.todos.map((todo) => {
+        if (todo.id === id) {
+          todo.completed = !todo.completed;
+        }
+        return todo;
+      })
+      return {
+        todos: updatedTodos
+      }
+    })
+  }
+
   render() {
-    const todos = this.state.todos.map(item => <TodoItems key={item.id} item={item} />);
+    const todosItems = this.state.todos.map(item => <TodoItems key={item.id} item={item} handleChange={this.handleChange}/>);
     return (
       <div className="App">
         <h1>Todos</h1>
-        {todos}
+        {todosItems}
       </div>
     );
   }
