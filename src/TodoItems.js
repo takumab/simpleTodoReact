@@ -1,14 +1,18 @@
 import React from 'react'
 
 function TodoItems(props) {
+    const completedStyles = {
+        fontStyle: "italic",
+        color: "#cdcdcd",
+        textDecoration: "line-through"
+    }
     return (
         <div>
             <input type="checkbox"
                 checked={props.item.completed}
                 onChange={() => props.handleChange(props.item.id)}
             />
-            <span>{props.item.text} </span>
-            <span style={{color: '#FD5A69'}}>{props.item.completed ? 'Completed' : 'Not yet'}</span>
+            <span style={props.item.completed ? completedStyles : null}>{props.item.text} </span>
             <br/>
         </div>
     )
